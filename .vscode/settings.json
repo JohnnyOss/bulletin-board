@@ -1,0 +1,7 @@
+{
+  "cSpell.enabled": false,
+  "blueprint.templatesPath": [
+    "./dev/blueprint-templates"
+  ],
+  "explorer.compactFolders": false
+}

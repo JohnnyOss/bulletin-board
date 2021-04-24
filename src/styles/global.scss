@@ -1,1 +1,25 @@
 @import "settings.scss";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: $color-text-dark;
+  background: $color-background-light;
+  font-family: $font-text;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-header;
+}

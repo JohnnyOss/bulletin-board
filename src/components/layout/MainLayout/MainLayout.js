@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Header} from '../Header/Header';
 
 import clsx from 'clsx';
 
@@ -10,8 +11,10 @@ import styles from './MainLayout.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>MainLayout</h2>
-    {children}
+    <div className={styles.container}>
+      <Header/>
+      {children}
+    </div>
   </div>
 );
 
@@ -31,7 +34,7 @@ Component.propTypes = {
 // const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as Mainlayout,
+  Component as MainLayout,
   // Container as Mainlayout,
-  Component as MainlayoutComponent,
+  Component as MainLayoutComponent,
 };

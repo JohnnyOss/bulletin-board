@@ -1,1 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap');
+
+/* Base */
 $base-size: 12px;
+
+/* Colors */
+$color-main: #0652DD;
+$color-text-dark: #222f3e;
+$color-text-light: #f1f2f6;
+$color-background-light: #c7ecee;
+$color-background-dark: #130f40;
+$color-button: #f9ca24;
+$color-button-hover: #FFC312;
+$color-success: #009432;
+$color-danger: #ff3838;
+
+/* Fonts */
+$font-header: 'Montserrat Alternates', sans-serif;
+$font-text: 'Nunito', sans-serif;
+
+/* Transition */
+$transition: all 0.3s;

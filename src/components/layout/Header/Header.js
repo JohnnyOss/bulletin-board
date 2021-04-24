@@ -1,5 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typograhy from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAd, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 import clsx from 'clsx';
 
@@ -10,7 +19,28 @@ import styles from './Header.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
+    <AppBar>
+      <Toolbar className={styles.toolbar}>
+        <Typograhy variant='h5'>
+          <Link to={'/'} className={styles.logo}>Bulletin Board</Link>
+        </Typograhy>
+        <div>
+          <Button variant="contained" href="#" className={styles.buttons}>
+            My ads
+            <FontAwesomeIcon icon={faAd} className={styles.icon}/>
+          </Button>
+          <Button variant="contained" href="#" className={styles.buttons}>
+            Logout
+            <FontAwesomeIcon icon={faSignOutAlt} className={styles.icon}/>
+          </Button>
+          <Button variant="contained" href="https://google.com" className={styles.buttons}>
+            Login
+            <FontAwesomeIcon icon={faUser} className={styles.icon}/>
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
+    <Toolbar />
     {children}
   </div>
 );

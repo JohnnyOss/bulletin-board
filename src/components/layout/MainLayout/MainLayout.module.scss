@@ -1,4 +1,8 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  .container{
+    padding: $base-size;
+    max-width: 1240px;
+  }
+}

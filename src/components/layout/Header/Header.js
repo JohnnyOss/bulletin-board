@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typograhy from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAd, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -21,9 +21,9 @@ const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
     <AppBar>
       <Toolbar className={styles.toolbar}>
-        <Typograhy variant='h5'>
+        <Typography variant='h5'>
           <Link to={'/'} className={styles.logo}>Bulletin Board</Link>
-        </Typograhy>
+        </Typography>
         <div>
           <Button variant="contained" href="#" className={styles.buttons}>
             My ads

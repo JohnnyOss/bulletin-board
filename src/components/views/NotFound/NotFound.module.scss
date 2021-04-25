@@ -1,4 +1,15 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  .content {
+    margin: 96px auto;
+    max-width: 500px;
+    text-align: center;
+
+    .button {
+      margin-top: 24px;
+      background-color: $color-main;
+      color: $color-text-light;
+    }
+  }
+}

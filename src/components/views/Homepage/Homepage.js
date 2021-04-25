@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { PostList } from '../../features/PostList/PostList';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -10,7 +12,9 @@ import styles from './Homepage.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Homepage</h2>
+    <div className={styles.content}>
+      <PostList />
+    </div>
     {children}
   </div>
 );

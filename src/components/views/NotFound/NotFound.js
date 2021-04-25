@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -10,7 +13,15 @@ import styles from './NotFound.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>NotFound</h2>
+    <div className={styles.content}>
+      <Typography variant='h3'>
+        Sorry, page not found!
+      </Typography>
+      <Typography variant='h6'>
+        Click link below to go back to homepage
+      </Typography>
+      <Button href='/' className={styles.button}>Homepage</Button>
+    </div>
     {children}
   </div>
 );

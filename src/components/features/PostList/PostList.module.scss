@@ -1,0 +1,43 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  .title{
+    margin: 36px auto;
+    text-align: center;
+  }
+
+  .table {
+    margin-bottom: 36px;
+
+    .tableHeader {
+      background-color: $color-main;
+      color: $color-text-light;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .titleLink {
+      text-decoration: none;
+      color: inherit;
+      font-size: 14px;
+      font-weight: 600;
+
+      &:hover {
+        color: $color-main;
+      }
+    }
+  }
+
+  .addButton {
+    margin: 36px auto;
+    text-align: center;
+    display: block;
+    width: 200px;
+    background-color: $color-main;
+    color: $color-text-light;
+
+    .icon {
+      margin-left: $base-size;
+    }
+  }
+}

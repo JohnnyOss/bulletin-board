@@ -12,6 +12,11 @@
 
     .buttons {
       margin-left: 10px;
+      background-color: $color-button-second;
+
+      &:hover {
+        background-color: $color-button-hover-second;
+      }
     }
 
     .icon {

@@ -40,7 +40,7 @@ const Component = ({className, postsList}) => (
         </TableHead>
         <TableBody>
           {postsList.map(post => (
-            <TableRow key={post.id} hover='false'>
+            <TableRow key={post.id}>
               <TableCell component="th" scope="row">
                 <Link to={`/post/${post.id}`} className={styles.titleLink}>{post.title}</Link>
               </TableCell>

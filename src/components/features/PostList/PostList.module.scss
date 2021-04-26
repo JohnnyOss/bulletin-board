@@ -33,11 +33,15 @@
     text-align: center;
     display: block;
     width: 200px;
-    background-color: $color-main;
+    background-color: $color-button;
     color: $color-text-light;
 
     .icon {
       margin-left: $base-size;
+    }
+
+    &:hover {
+      background-color: $color-button-hover;
     }
   }
 }

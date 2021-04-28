@@ -25,11 +25,11 @@ const Component = ({className, children}) => (
           <Link to={'/'} className={styles.logo}>Bulletin Board</Link>
         </Typography>
         <div>
-          <Button variant="contained" href="#" className={styles.buttons}>
+          <Button component={Link} to={'/'} variant="contained" className={styles.buttons}>
             My ads
             <FontAwesomeIcon icon={faAd} className={styles.icon}/>
           </Button>
-          <Button variant="contained" href="#" className={styles.buttons}>
+          <Button component={Link} to={'/'} variant="contained" className={styles.buttons}>
             Logout
             <FontAwesomeIcon icon={faSignOutAlt} className={styles.icon}/>
           </Button>

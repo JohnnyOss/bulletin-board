@@ -1,4 +1,69 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  .title{
+    margin: 36px auto;
+    text-align: center;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .adHeader {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .adContent {
+    min-height: 200px;
+    margin: 10px auto;
+    .contentText {
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+  }
+
+  .imageBox {
+    text-align: center;
+    img {
+      max-width: 25%;
+      margin: 5px;
+    }
+  }
+
+  .adInfo {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .icon {
+      margin-right: $base-size;
+    }
+
+    .status {
+      text-align: right;
+      align-content: flex-end;
+      display: grid;
+    }
+  }
+
+  .button {
+    margin: 36px auto;
+    text-align: center;
+    display: block;
+    width: 200px;
+    background-color: $color-button;
+    color: $color-text-light;
+
+    .icon {
+      margin-left: $base-size;
+    }
+
+    &:hover {
+      background-color: $color-button-hover;
+    }
+  }
+}

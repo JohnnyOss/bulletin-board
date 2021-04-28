@@ -43,12 +43,10 @@ class Component extends React.Component {
     const { post } = this.state;
 
     this.setState({ post: { ...post, [event.target.name]: event.target.value } });
-    // console.log('this.state', this.state);
   };
 
   handleImage = (files) => {
     const { post } = this.state;
-    // console.log('files', files[0].name);
 
     if (files !== undefined) this.setState({ post: { ...post, photo: files[0].name } });
   };
@@ -57,7 +55,6 @@ class Component extends React.Component {
     const { post } = this.state;
 
     this.setState({ post: { ...post, [event.target.name]: parseInt(event.target.value) } });
-    // console.log('this.state', this.state);
   };
 
   submitForm = (event) => {
@@ -67,9 +64,10 @@ class Component extends React.Component {
 
     if((post.title.length > 9) && (post.content.length > 19) && post.email && post.status) {
       post.id = uniqid();
-      post.datePublication = new Date().toISOString();
+      const today = new Date();
+      const dateToday = today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate();
+      post.datePublication = dateToday;
       post.dateLastUpdate = post.datePublication;
-      console.log('dodaje:', post);
       addPost(post);
 
       this.setState({
@@ -140,7 +138,7 @@ class Component extends React.Component {
                   <TextField name="phone" label="Phone" variant="outlined" onChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={12} sm={9} className={styles.formField}>
-                  <TextField name="location" label="Location" variant="outlined" onChange={this.handleChange}/>
+                  <TextField required name="location" label="Location" variant="outlined" onChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={12} sm={9} className={styles.formField}>
                   <Typography variant="h6" className={styles.formTitle}>

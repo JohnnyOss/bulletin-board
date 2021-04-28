@@ -52,7 +52,7 @@ const Component = ({className, postsList}) => (
         </TableBody>
       </Table>
     </TableContainer>
-    <Button variant="contained" href="/post/add" className={styles.addButton}>
+    <Button component={Link} to={'/post/add'} variant="contained" className={styles.addButton}>
       Add new ad
       <FontAwesomeIcon icon={faPlus} className={styles.icon}/>
     </Button>

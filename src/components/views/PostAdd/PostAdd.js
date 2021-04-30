@@ -18,10 +18,7 @@ import clsx from 'clsx';
 import uniqid from 'uniqid';
 
 import { connect } from 'react-redux';
-import { getAll, addPost } from '../../../redux/postsRedux';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { addPost } from '../../../redux/postsRedux';
 
 import styles from './PostAdd.module.scss';
 
@@ -85,6 +82,7 @@ class Component extends React.Component {
           location: '',
         },
       });
+      alert('Your ad has been published');
     } else {
       alert('Please fill required fields');
     }
@@ -175,15 +173,15 @@ Component.propTypes = {
   addPost: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-  postsAll: getAll(state),
-});
+// const mapStateToProps = state => ({
+//   postsAll: getAll(state),
+// });
 
 const mapDispatchToProps = dispatch => ({
   addPost: (post) => dispatch(addPost(post)),
 });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(null, mapDispatchToProps)(Component);
 
 export {
   // Component as PostAdd,

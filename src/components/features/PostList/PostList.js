@@ -23,46 +23,51 @@ import clsx from 'clsx';
 
 import styles from './PostList.module.scss';
 
-const Component = ({className, postsList}) => (
-  <div className={clsx(className, styles.root)}>
-    <Typography variant='h4' className={styles.title}>
-      Post Board
-    </Typography>
-    <TableContainer component={Paper} className={styles.table}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell className={styles.tableHeader}>Title</TableCell>
-            <TableCell className={styles.tableHeader}>Description</TableCell>
-            <TableCell className={styles.tableHeader}>Location</TableCell>
-            <TableCell className={styles.tableHeader}>Date of publication</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {postsList.map(post => (
-            <TableRow key={post.id}>
-              <TableCell component="th" scope="row">
-                <Link to={`/post/${post.id}`} className={styles.titleLink}>{post.title}</Link>
-              </TableCell>
-              <TableCell>{post.content}</TableCell>
-              <TableCell>{post.location}</TableCell>
-              <TableCell>{post.datePublication}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <Button component={Link} to={'/post/add'} variant="contained" className={styles.addButton}>
-      Add new ad
-      <FontAwesomeIcon icon={faPlus} className={styles.icon}/>
-    </Button>
-  </div>
-);
+class Component extends React.Component {
+  render() {
+    const {className, postsList} = this.props;
+    return (
+      <div className={clsx(className, styles.root)}>
+        <Typography variant='h4' className={styles.title}>
+          Post Board
+        </Typography>
+        <TableContainer component={Paper} className={styles.table}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className={styles.tableHeader}>Title</TableCell>
+                <TableCell className={styles.tableHeader}>Description</TableCell>
+                <TableCell className={styles.tableHeader}>Location</TableCell>
+                <TableCell className={styles.tableHeader}>Date of publication</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {postsList.map(post => (
+                <TableRow key={post.id}>
+                  <TableCell component="th" scope="row">
+                    <Link to={`/post/${post.id}`} className={styles.titleLink}>{post.title}</Link>
+                  </TableCell>
+                  <TableCell>{post.content}</TableCell>
+                  <TableCell>{post.location}</TableCell>
+                  <TableCell>{post.datePublication}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Button component={Link} to={'/post/add'} variant="contained" className={styles.addButton}>
+          Add new ad
+          <FontAwesomeIcon icon={faPlus} className={styles.icon}/>
+        </Button>
+      </div>
+    );
+  }
+}
 
 Component.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
-  postsList: PropTypes.any,
+  postsList: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 const mapStateToProps = state => ({

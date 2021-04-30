@@ -1,4 +1,32 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  .title{
+    margin: 36px auto;
+    text-align: center;
+  }
+
+  .formTitle {
+    padding: 24px;
+  }
+
+  .formField {
+    padding-bottom: 24px;
+  }
+
+  .submitButton {
+    text-align: center;
+    display: block;
+    width: 150px;
+    background-color: $color-button;
+    color: $color-text-light;
+
+    .icon {
+      margin-left: $base-size;
+    }
+
+    &:hover {
+      background-color: $color-button-hover;
+    }
+  }
+}

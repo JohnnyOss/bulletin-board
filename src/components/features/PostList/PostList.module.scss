@@ -9,7 +9,7 @@
   .table {
     margin-bottom: 36px;
 
-    .tableHeader {
+    .tableHeader, .contentHeader {
       background-color: $color-main;
       color: $color-text-light;
       font-size: 14px;
@@ -50,6 +50,14 @@
   .root {
     .title {
       margin: 108px auto 36px auto;
+    }
+
+    .contentHeader {
+      display: none;
+    }
+
+    .contentCell {
+      display: none;
     }
   }
 }

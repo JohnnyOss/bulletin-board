@@ -42,12 +42,12 @@ class Component extends React.Component {
                     {post.content}
                   </Typography>
                 </Paper>
-                <Grid>
+                <Paper>
                   <div className={styles.imageBox}>
                     {/* <img src={`'${post.photo}'`} alt='title'/> */}
                     <img src='https://placeimg.com/640/480/nature/1' alt='title'/>
                   </div>
-                </Grid>
+                </Paper>
               </Grid>
               <Paper className={styles.adInfo}>
                 <Grid>

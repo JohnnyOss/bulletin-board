@@ -70,5 +70,29 @@
     .title {
       margin: 24px auto;
     }
+
+    .adHeader {
+      display: block;
+      text-align: center;
+    }
+
+    .adContent {
+      min-height: 50px;
+    }
+
+    .imageBox {
+      text-align: center;
+      img {
+        max-width: 80%;
+        margin: 5px;
+      }
+    }
+
+    .adInfo {
+      .status {
+        margin-top: 15px;
+        text-align: left;
+      }
+    }
   }
 }

@@ -34,7 +34,7 @@ class Component extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell className={styles.tableHeader}>Title</TableCell>
-                <TableCell className={styles.tableHeader}>Description</TableCell>
+                <TableCell className={styles.contentHeader}>Description</TableCell>
                 <TableCell className={styles.tableHeader}>Location</TableCell>
                 <TableCell className={styles.tableHeader}>Date of publication</TableCell>
               </TableRow>
@@ -45,7 +45,7 @@ class Component extends React.Component {
                   <TableCell component="th" scope="row">
                     <Link to={`/post/${post.id}`} className={styles.titleLink}>{post.title}</Link>
                   </TableCell>
-                  <TableCell>{post.content}</TableCell>
+                  <TableCell className={styles.contentCell}>{post.content}</TableCell>
                   <TableCell>{post.location}</TableCell>
                   <TableCell>{post.datePublication}</TableCell>
                 </TableRow>

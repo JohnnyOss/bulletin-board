@@ -15,7 +15,7 @@ import styles from './NotFound.module.scss';
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
     <div className={styles.content}>
-      <Typography variant='h3'>
+      <Typography variant='h3'className={styles.header}>
         Sorry, page not found!
       </Typography>
       <Typography variant='h6'>

@@ -13,3 +13,12 @@
     }
   }
 }
+
+@media (max-width: 576px) {
+  .root {
+    .header {
+      font-size: 36px;
+      margin: 108px auto 12px auto;
+    }
+  }
+}

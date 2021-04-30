@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -20,7 +21,7 @@ const Component = ({className, children}) => (
       <Typography variant='h6'>
         Click link below to go back to homepage
       </Typography>
-      <Button href='/' className={styles.button}>Homepage</Button>
+      <Button component={Link} to={'/'} className={styles.button}>Homepage</Button>
     </div>
     {children}
   </div>

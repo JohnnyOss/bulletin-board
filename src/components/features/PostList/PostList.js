@@ -23,7 +23,7 @@ import styles from './PostList.module.scss';
 
 class Component extends React.Component {
   render() {
-    const {className, postsList} = this.props;
+    const {className, postsList, user} = this.props;
     return (
       <div className={clsx(className, styles.root)}>
         <Typography variant='h4' className={styles.title}>
@@ -53,10 +53,14 @@ class Component extends React.Component {
             </TableBody>
           </Table>
         </TableContainer>
-        <Button component={Link} to={'/post/add'} variant="contained" className={styles.addButton}>
-          Add new ad
-          <FontAwesomeIcon icon={faPlus} className={styles.icon}/>
-        </Button>
+        {user.active === true
+          ?
+          <Button component={Link} to={'/post/add'} variant="contained" className={styles.addButton}>
+            Add new ad
+            <FontAwesomeIcon icon={faPlus} className={styles.icon}/>
+          </Button>
+          :
+          null}
       </div>
     );
   }
@@ -66,10 +70,12 @@ Component.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   postsList: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  user: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   postsList: getAll(state),
+  user: state.user,
 });
 
 // const mapDispatchToProps = dispatch => ({

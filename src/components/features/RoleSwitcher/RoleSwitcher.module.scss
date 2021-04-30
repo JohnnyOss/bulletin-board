@@ -1,0 +1,15 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  .select {
+    padding: 0 5px;
+    width: 150px;
+    background-color: $color-button-second;
+    $transition: all 0.3s;
+
+      &:hover {
+        background-color: $color-button-hover-second;
+      }
+  }
+
+}

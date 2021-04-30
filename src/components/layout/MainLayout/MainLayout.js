@@ -12,9 +12,8 @@ import styles from './MainLayout.module.scss';
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
     <div className={styles.container}>
-      <Header>
-        {children}
-      </Header>
+      <Header />
+      {children}
     </div>
   </div>
 );

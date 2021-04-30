@@ -18,12 +18,15 @@ import styles from './Post.module.scss';
 
 class Component extends React.Component {
   render () {
-    const { className, post } = this.props;
+    const { className, post, user } = this.props;
 
     return(
       <div className={clsx(className, styles.root)}>
         <Grid align="center">
           <Grid item align="left" xs={12} sm={9}>
+            <Typography variant='h4' className={styles.title}>
+              <br></br>
+            </Typography>
             <Paper className={styles.container}>
               <Grid className={styles.adHeader}>
                 <Typography variant="h4">
@@ -64,10 +67,15 @@ class Component extends React.Component {
             </Paper>
           </Grid>
         </Grid>
-        <Button component={Link} to={`/post/${post.id}/edit`} variant="contained" className={styles.button}>
+        {user.active === true
+          ?
+          <Button component={Link} to={`/post/${post.id}/edit`} variant="contained" className={styles.button}>
             Edit post
-          <FontAwesomeIcon icon={faEdit} className={styles.icon}/>
-        </Button>
+            <FontAwesomeIcon icon={faEdit} className={styles.icon}/>
+          </Button>
+          :
+          null
+        }
       </div>
     );
   }
@@ -77,10 +85,12 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   post: PropTypes.object,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state, props) => ( {
   post: getPostById(state, props.match.params.id),
+  user: state.user,
 } );
 
 // const mapDispatchToProps = dispatch => ({

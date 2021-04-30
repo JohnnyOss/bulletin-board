@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux';
 import { Link } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
@@ -18,8 +16,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getAll } from '../../../redux/postsRedux';
 
 import styles from './PostList.module.scss';
 

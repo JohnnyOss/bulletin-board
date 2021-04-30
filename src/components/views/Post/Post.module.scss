@@ -1,10 +1,6 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  .title{
-    margin: 36px auto;
-    text-align: center;
-  }
 
   .container {
     margin-top: 24px;
@@ -65,6 +61,14 @@
 
     &:hover {
       background-color: $color-button-hover;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .root {
+    .title {
+      margin: 24px auto;
     }
   }
 }

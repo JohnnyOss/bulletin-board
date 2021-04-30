@@ -5,12 +5,25 @@
     justify-content: space-between;
     background-color: $color-main;
 
-    .logo {
-      color: inherit;
-      text-decoration: none;
+    .logoBox {
+      display: flex;
+
+      .logo {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .switcher {
+        margin-left: 30px;
+      }
     }
 
     .buttons {
+      text-align: center;
+      margin: 10px;
+    }
+
+    .button {
       margin-left: 10px;
       background-color: $color-button-second;
 
@@ -21,6 +34,26 @@
 
     .icon {
       margin-left: $base-size;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .root {
+    .toolbar {
+      display: block;
+    }
+    .logoBox {
+      padding: 10px;
+
+      .logo {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .switcher {
+        margin-left: 30px;
+      }
     }
   }
 }

@@ -45,3 +45,11 @@
     }
   }
 }
+
+@media (max-width: 576px) {
+  .root {
+    .title {
+      margin: 108px auto 36px auto;
+    }
+  }
+}

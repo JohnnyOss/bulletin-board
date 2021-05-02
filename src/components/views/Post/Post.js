@@ -12,13 +12,19 @@ import { faMapMarkerAlt, faEnvelope, faPhoneAlt, faEdit } from '@fortawesome/fre
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getPostById } from '../../../redux/postsRedux.js';
+import { fetchPost, getPost } from '../../../redux/postsRedux.js';
 
 import styles from './Post.module.scss';
 
 class Component extends React.Component {
-  render () {
-    const { className, post, user } = this.props;
+
+  componentDidMount() {
+    const { fetchOnePost } = this.props;
+    fetchOnePost();
+  }
+
+  render() {
+    const { className, user, post } = this.props;
 
     return(
       <div className={clsx(className, styles.root)}>
@@ -54,7 +60,7 @@ class Component extends React.Component {
                   <Typography variant="h6">
                     Contact:
                   </Typography>
-                  <FontAwesomeIcon icon={faEnvelope} className={styles.icon}/>Email: {post.email} <br/>
+                  <FontAwesomeIcon icon={faEnvelope} className={styles.icon}/>Email: {post.author} <br/>
                   <FontAwesomeIcon icon={faPhoneAlt} className={styles.icon}/>Phone: {post.phone} <br/>
                   <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon}/>Location: {post.location}
                 </Grid>
@@ -69,7 +75,7 @@ class Component extends React.Component {
         </Grid>
         {user.active === true
           ?
-          <Button component={Link} to={`/post/${post.id}/edit`} variant="contained" className={styles.button}>
+          <Button component={Link} to={`/post/${post._id}/edit`} variant="contained" className={styles.button}>
             Edit post
             <FontAwesomeIcon icon={faEdit} className={styles.icon}/>
           </Button>
@@ -82,22 +88,22 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
-  post: PropTypes.object,
+  post: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   user: PropTypes.object,
+  fetchOnePost: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => ( {
-  post: getPostById(state, props.match.params.id),
+  post: getPost(state),
   user: state.user,
 } );
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchOnePost: () => dispatch(fetchPost(props.match.params.id)),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as Post,

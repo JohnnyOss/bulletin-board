@@ -16,10 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 import clsx from 'clsx';
-import uniqid from 'uniqid';
 
 import { connect } from 'react-redux';
-import { addPost } from '../../../redux/postsRedux';
+import { fetchAddPost } from '../../../redux/postsRedux';
 
 import styles from './PostAdd.module.scss';
 
@@ -28,7 +27,9 @@ class Component extends React.Component {
     post: {
       title: '',
       content: '',
-      email: '',
+      datePublication: '',
+      dateLastUpdate: '',
+      author: '',
       status: '',
       photo: null,
       price: '',
@@ -60,8 +61,7 @@ class Component extends React.Component {
     const { post } = this.state;
     const { addPost } = this.props;
 
-    if((post.title.length > 9) && (post.content.length > 19) && post.email && post.status) {
-      post.id = uniqid();
+    if((post.title.length > 9) && (post.content.length > 19) && post.author && post.status) {
       const today = new Date();
       const dateToday = today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate();
       post.datePublication = dateToday;
@@ -70,12 +70,11 @@ class Component extends React.Component {
 
       this.setState({
         post: {
-          id: '',
           title: '',
           content: '',
           datePublication: '',
           dateLastUpdate: '',
-          email: '',
+          author: '',
           status: '',
           photo: '',
           price: '',
@@ -104,19 +103,19 @@ class Component extends React.Component {
               <Grid item align="center" xs={12} sm={9}>
                 <Paper>
                   <form onSubmit={this.submitForm}>
-                    <Typography variant="h6" className={styles.formTitle}>
+                    <Typography variant="h5" className={styles.formTitle}>
                         Fill in the form
                     </Typography>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField required name="title" label="Title" variant="outlined" onChange={this.handleChange} helperText="min. 10 characters"/>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
+                      <TextField fullWidth required name="title" label="Title" variant="outlined" onChange={this.handleChange} helperText="min. 10 characters"/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField required name="content" label="Describe Ad" variant="outlined" onChange={this.handleChange} helperText="min. 20 characters"/>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
+                      <TextField fullWidth required name="content" label="Describe Ad" variant="outlined" onChange={this.handleChange} helperText="min. 20 characters"/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField required name="email" label="Email" variant="outlined" onChange={this.handleChange}/>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
+                      <TextField fullWidth required name="author" label="Email" variant="outlined" onChange={this.handleChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
                       <FormControl>
                         <InputLabel htmlFor="age-native-helper">Status</InputLabel>
                         <NativeSelect
@@ -133,16 +132,16 @@ class Component extends React.Component {
                         <FormHelperText>Select your ad status</FormHelperText>
                       </FormControl>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField name="price" label="Price ($)" type="number" variant="outlined" onChange={this.handleChangePrice}/>
+                    <Grid item xs={11} sm={3} className={styles.formField}>
+                      <TextField fullWidth name="price" label="Price ($)" type="number" variant="outlined" onChange={this.handleChangePrice}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField name="phone" label="Phone" variant="outlined" onChange={this.handleChange}/>
+                    <Grid item xs={11} sm={3} className={styles.formField}>
+                      <TextField fullWidth name="phone" label="Phone" type="number" variant="outlined" onChange={this.handleChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField required name="location" label="Location" variant="outlined" onChange={this.handleChange}/>
+                    <Grid item xs={11} sm={3} className={styles.formField}>
+                      <TextField fullWidth required name="location" label="Location" variant="outlined" onChange={this.handleChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
                       <Typography variant="h6" className={styles.formTitle}>
                           Submit photo (optional)
                       </Typography>
@@ -156,7 +155,7 @@ class Component extends React.Component {
                         singleImage={true}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
                       <Button variant="outlined" type="submit" className={styles.submitButton}>
                         Submit
                         <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
@@ -176,7 +175,6 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   addPost: PropTypes.func,
   user: PropTypes.object,
@@ -187,7 +185,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: (post) => dispatch(addPost(post)),
+  addPost: (post) => dispatch(fetchAddPost(post)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

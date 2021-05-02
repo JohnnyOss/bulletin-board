@@ -6,7 +6,7 @@ const reducerName = 'statusUser';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
-const LOAD_STATUS = createActionName('LOAD_STATUS_USER');
+const LOAD_STATUS = createActionName('LOAD_STATUS');
 
 /* action creators */
 export const loadStatusUser = payload => ({ payload, type: LOAD_STATUS });

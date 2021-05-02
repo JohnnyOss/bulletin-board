@@ -17,11 +17,17 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux';
+import { getAll, fetchPublished } from '../../../redux/postsRedux';
 
 import styles from './PostList.module.scss';
 
 class Component extends React.Component {
+
+  componentDidMount() {
+    const { fetchPublishedPosts } = this.props;
+    fetchPublishedPosts();
+  }
+
   render() {
     const {className, postsList, user} = this.props;
     return (
@@ -40,10 +46,10 @@ class Component extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {postsList.map(post => (
-                <TableRow key={post.id}>
+              {postsList.map((post, index) => (
+                <TableRow key={index}>
                   <TableCell component="th" scope="row">
-                    <Link to={`/post/${post.id}`} className={styles.titleLink}>{post.title}</Link>
+                    <Link to={`/post/${post._id}`} className={styles.titleLink}>{post.title}</Link>
                   </TableCell>
                   <TableCell className={styles.contentCell}>{post.content}</TableCell>
                   <TableCell>{post.location}</TableCell>
@@ -71,6 +77,7 @@ Component.propTypes = {
   children: PropTypes.node,
   postsList: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   user: PropTypes.object,
+  fetchPublishedPosts: PropTypes.any,
 };
 
 const mapStateToProps = state => ({
@@ -78,11 +85,11 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as PostList,

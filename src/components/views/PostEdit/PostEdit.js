@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 import { connect } from 'react-redux';
-import { getPostById, updatePost } from '../../../redux/postsRedux.js';
+import {  getPost, updatePost } from '../../../redux/postsRedux.js';
 
 import styles from './PostEdit.module.scss';
 
@@ -57,7 +57,7 @@ class Component extends React.Component {
     const { postData } = this.state;
     const { editPost } = this.props;
 
-    if((postData.title.length > 9) && (postData.content.length > 19) && postData.email && postData.status && postData.location) {
+    if((postData.title.length > 9) && (postData.content.length > 19) && postData.author && postData.status && postData.location) {
       const today = new Date();
       const dateToday = today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate();
       postData.dateLastUpdate = dateToday;
@@ -84,19 +84,19 @@ class Component extends React.Component {
               <Grid item align="center" xs={12} sm={9}>
                 <Paper>
                   <form onSubmit={submitForm}>
-                    <Typography variant="h6" className={styles.formTitle}>
+                    <Typography variant="h5" className={styles.formTitle}>
                         Fill in the form
                     </Typography>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField required id="title" label="Title" variant="outlined" onChange={handleChange} value={postData.title} helperText="min. 10 characters"/>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
+                      <TextField fullWidth required id="title" label="Title" variant="outlined" onChange={handleChange} value={postData.title} helperText="min. 10 characters"/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField value={postData.content} required id="content" label="Describe Ad" variant="outlined" onChange={handleChange} helperText="min. 20 characters"/>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
+                      <TextField fullWidth value={postData.content} required id="content" label="Describe Ad" variant="outlined" onChange={handleChange} helperText="min. 20 characters"/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField value={postData.email} required id="email" label="Email" variant="outlined" onChange={handleChange}/>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
+                      <TextField fullWidth value={postData.author} required id="email" label="Email" variant="outlined" onChange={handleChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
                       <FormControl>
                         <InputLabel htmlFor="age-native-helper">Status</InputLabel>
                         <NativeSelect
@@ -113,16 +113,16 @@ class Component extends React.Component {
                         <FormHelperText>Select your ad status</FormHelperText>
                       </FormControl>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField value={postData.price} id="price" label="Price ($)" type="number" variant="outlined" onChange={handleChangePrice}/>
+                    <Grid item xs={11} sm={3} className={styles.formField}>
+                      <TextField fullWidth value={postData.price} id="price" label="Price ($)" type="number" variant="outlined" onChange={handleChangePrice}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField value={postData.phone} id="phone" label="Phone" variant="outlined" onChange={handleChange}/>
+                    <Grid item xs={11} sm={3} className={styles.formField}>
+                      <TextField fullWidth value={postData.phone} id="phone" label="Phone" variant="outlined" onChange={handleChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
-                      <TextField value={postData.location} required id="location" label="Location" variant="outlined" onChange={handleChange}/>
+                    <Grid item xs={11} sm={3} className={styles.formField}>
+                      <TextField fullWidth value={postData.location} required id="location" label="Location" variant="outlined" onChange={handleChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
+                    <Grid item xs={11} sm={6} className={styles.formField}>
                       <Typography variant="h6" className={styles.formTitle}>
                           Submit photo (optional)
                       </Typography>
@@ -136,7 +136,7 @@ class Component extends React.Component {
                         singleImage={true}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={9} className={styles.formField}>
+                    <Grid item xs={12} sm={3} className={styles.formField}>
                       <Button variant="outlined" type="submit" className={styles.submitButton}>
                         Submit
                         <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
@@ -156,15 +156,14 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
-  post: PropTypes.object,
+  post: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   editPost: PropTypes.func,
   user: PropTypes.object,
 };
 
 const mapStateToProps = (state, props) => ( {
-  post: getPostById(state, props.match.params.id),
+  post: getPost(state),
   user: state.user,
 });
 

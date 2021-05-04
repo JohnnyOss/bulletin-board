@@ -18,50 +18,53 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 import { connect } from 'react-redux';
-import {  getPost, updatePost } from '../../../redux/postsRedux.js';
+import { getPost, fetchUpdatePost } from '../../../redux/postsRedux.js';
 
 import styles from './PostEdit.module.scss';
 
 
 class Component extends React.Component {
   state = {
-    postData: { ...this.props.post },
+    post: {
+      _id: this.props.postById._id,
+      title: this.props.postById.title,
+      content: this.props.postById.content,
+      price: this.props.postById.price,
+      photo: this.props.postById.photo,
+      author: this.props.postById.author,
+      location: this.props.postById.location,
+      phone: this.props.postById.phone,
+      status: this.props.postById.status,
+      datePublication: this.props.postById.datePublication,
+      dateLastUpdate: this.props.postById.dateLastUpdate,
+    },
   }
 
-  handleChange = ({ target }) => {
-    const { postData } = this.state;
-    const { value, id } = target;
-    this.setState({ postData: { ...postData, [ id ]: value } });
-  }
+  handleChange = (event) => {
+    const { post } = this.state;
+    this.setState({ post: { ...post, [event.target.name]: event.target.value } });
+  };
 
-  handleStatusChange = (event) => {
-    const { postData } = this.state;
-    const { value } = event.target;
-
-    this.setState( {
-      postData: {
-        ...postData,
-        status: value,
-      },
-    } );
-  }
-
-  handleChangePrice = ({ target }) => {
-    const { postData } = this.state;
-    const { value } = target;
-    this.setState({ postData: { ...postData, price: parseInt(value) } });
+  handleChangePrice = (event) => {
+    const { post } = this.state;
+    this.setState({ post: { ...post, [event.target.name]: parseInt(event.target.value) } });
   };
 
   submitForm = (event) => {
     event.preventDefault();
-    const { postData } = this.state;
+    const { post } = this.state;
     const { editPost } = this.props;
 
-    if((postData.title.length > 9) && (postData.content.length > 19) && postData.author && postData.status && postData.location) {
+    if(post.title.length < 10) return alert('Min. 10 characters in title');
+    if(post.content.length < 20) return alert('Min. 20 characters in text');
+    if(post.price <= 0) return alert('Wrong price');
+    if(post.location.length < 0) return alert('You need to enter the location');
+
+    if((post.title.length > 9) && (post.content.length > 19) && post.author && post.status && post.location) {
       const today = new Date();
       const dateToday = today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate();
-      postData.dateLastUpdate = dateToday;
-      editPost(postData);
+      post.dateLastUpdate = dateToday;
+      editPost(post);
       alert('Your ad has been edited');
     } else {
       alert('Please fill required fields');
@@ -69,9 +72,7 @@ class Component extends React.Component {
   }
 
   render () {
-    const { className, user } = this.props;
-    const { postData } = this.state;
-    const { submitForm, handleChange, handleStatusChange, handleChangePrice } = this;
+    const { className, user, postById } = this.props;
     return (
       <div className={clsx(className, styles.root)}>
         {user.active === true
@@ -83,27 +84,27 @@ class Component extends React.Component {
             <Grid align="center">
               <Grid item align="center" xs={12} sm={9}>
                 <Paper>
-                  <form onSubmit={submitForm}>
+                  <form onSubmit={this.submitForm}>
                     <Typography variant="h5" className={styles.formTitle}>
                         Fill in the form
                     </Typography>
                     <Grid item xs={11} sm={6} className={styles.formField}>
-                      <TextField fullWidth required id="title" label="Title" variant="outlined" onChange={handleChange} value={postData.title} helperText="min. 10 characters"/>
+                      <TextField fullWidth required name="title" label="Title" variant="outlined" onChange={this.handleChange} defaultValue={postById.title} helperText="min. 10 characters"/>
                     </Grid>
                     <Grid item xs={11} sm={6} className={styles.formField}>
-                      <TextField fullWidth value={postData.content} required id="content" label="Describe Ad" variant="outlined" onChange={handleChange} helperText="min. 20 characters"/>
+                      <TextField fullWidth defaultValue={postById.content} required name="content" label="Describe Ad" variant="outlined" onChange={this.handleChange} helperText="min. 20 characters"/>
                     </Grid>
                     <Grid item xs={11} sm={6} className={styles.formField}>
-                      <TextField fullWidth value={postData.author} required id="email" label="Email" variant="outlined" onChange={handleChange}/>
+                      <TextField fullWidth defaultValue={postById.author} required name="email" label="Email" variant="outlined" onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={11} sm={6} className={styles.formField}>
                       <FormControl>
                         <InputLabel htmlFor="age-native-helper">Status</InputLabel>
                         <NativeSelect
                           required
-                          id="status"
-                          onChange={handleStatusChange}
-                          value={postData.status}
+                          name="status"
+                          onChange={this.handleChange}
+                          defaultValue={postById.status}
                         >
                           <option aria-label="None" value="" />
                           <option value="draft">Draft</option>
@@ -114,13 +115,13 @@ class Component extends React.Component {
                       </FormControl>
                     </Grid>
                     <Grid item xs={11} sm={3} className={styles.formField}>
-                      <TextField fullWidth value={postData.price} id="price" label="Price ($)" type="number" variant="outlined" onChange={handleChangePrice}/>
+                      <TextField fullWidth defaultValue={postById.price} name="price" label="Price ($)" type="number" variant="outlined" onChange={this.handleChangePrice}/>
                     </Grid>
                     <Grid item xs={11} sm={3} className={styles.formField}>
-                      <TextField fullWidth value={postData.phone} id="phone" label="Phone" variant="outlined" onChange={handleChange}/>
+                      <TextField fullWidth defaultValue={postById.phone} name="phone" label="Phone" variant="outlined" onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={11} sm={3} className={styles.formField}>
-                      <TextField fullWidth value={postData.location} required id="location" label="Location" variant="outlined" onChange={handleChange}/>
+                      <TextField fullWidth defaultValue={postById.location} required name="location" label="Location" variant="outlined" onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={11} sm={6} className={styles.formField}>
                       <Typography variant="h6" className={styles.formTitle}>
@@ -157,18 +158,19 @@ class Component extends React.Component {
 
 Component.propTypes = {
   className: PropTypes.string,
-  post: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  postById: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   editPost: PropTypes.func,
   user: PropTypes.object,
+  post: PropTypes.any,
 };
 
 const mapStateToProps = (state, props) => ( {
-  post: getPost(state),
+  postById: getPost(state),
   user: state.user,
 });
 
 const mapDispatchToProps = dispatch => ( {
-  editPost: (data) => dispatch(updatePost(data)),
+  editPost: (data) => dispatch(fetchUpdatePost(data)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

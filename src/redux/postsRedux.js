@@ -73,6 +73,21 @@ export const fetchAddPost = (post) => {
   };
 };
 
+export const fetchUpdatePost = (post, id) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+    Axios
+      .put(`http://localhost:8000/api/posts/${id}/edit`, post)
+      .then(res => {
+        dispatch(updatePost(post));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+
+  };
+};
+
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
@@ -124,6 +139,20 @@ export const reducer = (statePart = [], action = {}) => {
           changePost: true,
         },
         data: [...statePart.data, action.payload],
+      };
+    }
+    case UPDATE_POST: {
+      const statePartIndex = statePart.data.findIndex(post => post._id === action.payload._id);
+      statePart.data.splice(statePartIndex, 1, action.payload);
+
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+          changePost: true,
+        },
+        data: [...statePart.data],
       };
     }
     default:

@@ -61,6 +61,11 @@ class Component extends React.Component {
     const { post } = this.state;
     const { addPost } = this.props;
 
+    if(post.title.length < 10) return alert('Min. 10 characters in title');
+    if(post.content.length < 20) return alert('Min. 20 characters in text');
+    if(post.price <= 0) return alert('Wrong price');
+    if(post.location.length < 0) return alert('You need to enter the location');
+
     if((post.title.length > 9) && (post.content.length > 19) && post.author && post.status) {
       const today = new Date();
       const dateToday = today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate();
@@ -84,7 +89,7 @@ class Component extends React.Component {
       });
       alert('Your ad has been published');
     } else {
-      alert('Please fill required fields');
+      alert('Something gone wrong');
     }
   };
 

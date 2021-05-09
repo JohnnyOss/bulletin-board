@@ -63,7 +63,7 @@ class Component extends React.Component {
 
     if(post.title.length < 10) return alert('Min. 10 characters in title');
     if(post.content.length < 20) return alert('Min. 20 characters in text');
-    if(post.price <= 0) return alert('Wrong price');
+    if(post.price < 0) return alert('Wrong price');
     if(post.location.length < 0) return alert('You need to enter the location');
 
     if((post.title.length > 9) && (post.content.length > 19) && post.author && post.status) {
